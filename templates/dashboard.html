@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2 class="mb-3">Dashboard</h2>
+<form method="get" class="row g-3 mb-3">
+  <div class="col-auto">
+    <input type="date" name="date" value="{{ selected_date|date:'Y-m-d' }}" class="form-control" />
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-secondary" type="submit">Update</button>
+  </div>
+ </form>
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="card"><div class="card-body"><h5>Total Students</h5><h3>{{ total_students }}</h3></div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card"><div class="card-body"><h5>Present</h5><h3 class="text-success">{{ present_count }}</h3></div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card"><div class="card-body"><h5>Absent</h5><h3 class="text-danger">{{ absent_count }}</h3></div></div>
+  </div>
+</div>
+{% endblock %}

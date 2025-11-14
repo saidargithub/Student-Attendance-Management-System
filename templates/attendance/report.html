@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Attendance Report{% endblock %}
+{% block content %}
+<h2 class="mb-3">Attendance Report</h2>
+<form method="get" class="row g-3 mb-3">
+  <div class="col-auto">
+    {{ form.date.label_tag }}
+    {{ form.date }}
+  </div>
+  <div class="col-auto">
+    {{ form.student_class.label_tag }}
+    {{ form.student_class }}
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-secondary" type="submit">Update</button>
+  </div>
+</form>
+
+<div class="row text-center">
+  <div class="col-md-6">
+    <div class="card"><div class="card-body"><h5>Present</h5><h3 class="text-success">{{ present_count }}</h3></div></div>
+  </div>
+  <div class="col-md-6">
+    <div class="card"><div class="card-body"><h5>Absent</h5><h3 class="text-danger">{{ absent_count }}</h3></div></div>
+  </div>
+</div>
+{% endblock %}

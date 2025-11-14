@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Mark Attendance{% endblock %}
+{% block content %}
+<h2 class="mb-3">Mark Attendance</h2>
+<form method="get" class="row g-3 mb-3">
+  <div class="col-auto">
+    {{ form.student_class.label_tag }}
+    {{ form.student_class }}
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-secondary" type="submit">Filter</button>
+  </div>
+</form>
+
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="date" class="form-label">Date</label>
+    <input type="date" id="date" name="date" class="form-control" value="{{ form.cleaned_data.date|date:'Y-m-d' if form.is_bound and form.cleaned_data.date }}" required>
+  </div>
+  <input type="hidden" name="student_class" value="{{ form.cleaned_data.student_class }}" />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Roll No</th>
+        <th>Name</th>
+        <th>Present</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in students %}
+      <tr>
+        <td>{{ s.roll_no }}</td>
+        <td>{{ s.name }}</td>
+        <td><input type="checkbox" name="present_{{ s.id }}"></td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="3" class="text-center">No students to mark.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-primary">Save Attendance</button>
+</form>
+{% endblock %}
